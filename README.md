@@ -1,2 +1,2 @@
-Devoitine Délèna 
+Devoitine Célèna 
 Richardin--Dutilleul Killian

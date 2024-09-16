@@ -12,5 +12,5 @@ jobs:
     - uses: php-actions/phpunit@v3
       with:
         php_version: '8.2' # Spécification de la version php pour github
-        php_extensions: gd # Ajout de l'extension gd pour pouvoir lancer les tests
-        bootstrap: tst/bootstrap.php
+        php_extensions: gd, xdebug # Ajout de l'extension gd pour pouvoir lancer les tests
+        coverage_clover: "coverage/clover.xml"

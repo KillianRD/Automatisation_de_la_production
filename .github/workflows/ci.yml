@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: php-actions/composer@v6 # or alternative dependency management
+    - uses: php-actions/phpunit@v3
+      with:
+        php_version: '8.2' # Spécification de la version php pour github
+        php_extensions: gd # Ajout de l'extension gd pour pouvoir lancer les tests

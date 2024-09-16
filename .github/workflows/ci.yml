@@ -8,11 +8,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: php-actions/composer@v6 # or alternative dependency management
+    - uses: php-actions/composer@v6
     - name: Create coverage directory
-      run: mkdir -p coverage # Création du répertoire pour le rapport de couverture
+      run: mkdir -p coverage
     - uses: php-actions/phpunit@v3
       with:
-        php_version: '8.2' # Spécification de la version php pour github
+        php_version: '8.2'
         php_extensions: "xdebug"
         coverage_clover: "coverage/clover.xml"
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: coverage/clover.xml

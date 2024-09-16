@@ -10,4 +10,6 @@ jobs:
     - uses: actions/checkout@v3
     - uses: php-actions/composer@v6 # or alternative dependency management
     - uses: php-actions/phpunit@v3
-    # ... then your own project steps ...
+      with:
+        php_version: '8.2' # Spécification de la version php pour github
+        php_extensions: gd # Ajout de l'extension gd pour pouvoir lancer les tests

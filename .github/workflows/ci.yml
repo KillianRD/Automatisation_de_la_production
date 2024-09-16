@@ -9,6 +9,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: php-actions/composer@v6 # or alternative dependency management
+    - name: Create coverage directory
+      run: mkdir -p coverage # Création du répertoire pour le rapport de couverture
     - uses: php-actions/phpunit@v3
       with:
         php_version: '8.2' # Spécification de la version php pour github

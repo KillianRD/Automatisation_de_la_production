@@ -6,4 +6,4 @@ start:
 
 test:
 	# cd tst && ../vendor/bin/phpunit
-	XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-text=log/coverage.txt --coverage-html=log/php-coverage-report tst
+	./vendor/bin/phpunit tst

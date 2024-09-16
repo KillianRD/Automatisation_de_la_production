@@ -11,11 +11,25 @@ jobs:
     - uses: php-actions/composer@v6
     - name: Create coverage directory
       run: mkdir -p coverage
+    - name: Set up Xdebug
+      run: |
+        echo "zend_extension=xdebug.so" >> $HOME/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+        echo "xdebug.mode=coverage" >> $HOME/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - name: Debug
+      run: echo "Running PHPUnit tests..."
     - uses: php-actions/phpunit@v3
       with:
         php_version: '8.2'
         php_extensions: "xdebug"
         coverage_clover: "coverage/clover.xml"
+    - name: Check coverage file
+      run: |
+        if [ -f coverage/clover.xml ]; then
+          echo "Coverage file exists."
+        else
+          echo "Coverage file does not exist."
+          exit 1
+        fi
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
       with:

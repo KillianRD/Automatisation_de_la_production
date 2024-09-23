@@ -13,4 +13,3 @@ jobs:
       with:
         php_version: '8.2'
         php_extensions: "gd"
-        coverage_clover: "log/clover.xml"

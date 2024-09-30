@@ -22,7 +22,7 @@ jobs:
         if: success()
 
       - name: Show coverage report
-        run: cat log/coverage-clover.xml
+        run: cat log/coverage-cobertura.xml
         if: success()
 
       - name: Generate coverage summary

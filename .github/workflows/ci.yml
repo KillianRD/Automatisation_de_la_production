@@ -14,3 +14,4 @@ jobs:
           version: 9.6.1
           php_version: '8.2'
           php_extensions: gd mbstring pcov tokenizer
+      - run: cat log/coverage-clover.xml

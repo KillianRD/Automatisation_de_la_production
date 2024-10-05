@@ -28,10 +28,10 @@ jobs:
           filename: log/coverage-cobertura.xml
       
       - name: Run PHPCS
-        run: /vendor/bin/phpcs --extensions=php ./lib/
+        run: vendor/bin/phpcs --extensions=php ./lib/
 
       - name: Run PHPMD
-        run: /vendor/bin/phpmd ./lib ansi codesize,unusedcode,naming
+        run: vendor/bin/phpmd ./lib ansi codesize,unusedcode,naming
 
       - name: Run PHPStan
-        run: /vendor/bin/phpstan analyse ./lib/ --level=max
+        run: vendor/bin/phpstan analyse ./lib/ --level=max

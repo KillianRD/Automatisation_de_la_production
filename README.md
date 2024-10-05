@@ -2,6 +2,15 @@ Automatisation de la production
 ==============================
 Devoitine Célèna <br>
 Richardin--Dutilleul Killian
+<br>
+
+#### Pour que les tests fonctionne sans erreur d'allocation mémoire nous devons retirer la ligne suivante dans le fichier phpunit.xml.
+Cette ligne permet d'ajouter les librairies au projet, nous partons du principe que si elles sont en ligne, c'est qu'elles ont été testé.
+
+```
+<directory suffix=".php">./vendor</directory>
+```
+<br>
 
 #### Cette ligne permet de définir le nom de notre action GitHub. <br>
 ```

@@ -26,3 +26,12 @@ jobs:
         id: coverage_summary
         with:
           filename: log/coverage-cobertura.xml
+      
+      - name: Run PHPCS
+        run: /vendor/bin/phpcs --extensions=php ./lib/
+
+      - name: Run PHPMD
+        run: /vendor/bin/phpmd ./lib ansi codesize,unusedcode,naming
+
+      - name: Run PHPStan
+        run: /vendor/bin/phpstan analyse ./lib/ --level=max

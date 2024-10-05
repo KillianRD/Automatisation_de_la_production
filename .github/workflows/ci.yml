@@ -21,18 +21,8 @@ jobs:
           php_extensions: gd mbstring pcov tokenizer
         if: success()
 
-      - name: Show coverage report
-        run: cat log/coverage-cobertura.xml
-        if: success()
-
       - name: Generate coverage summary
         uses: irongut/CodeCoverageSummary@v1.3.0
         id: coverage_summary
         with:
           filename: log/coverage-cobertura.xml
-        if: success()
-
-      - name: Output coverage summary
-        run: echo "$COVERAGE_SUMMARY" >> $GITHUB_STEP_SUMMARY
-        env:
-          COVERAGE_SUMMARY: ${{ steps.coverage_summary.outputs.summary }}

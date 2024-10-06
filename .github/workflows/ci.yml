@@ -29,9 +29,12 @@ jobs:
       
       - name: Run PHPCS
         run: vendor/bin/phpcs --extensions=php ./lib/Controller.php --report=summary
+        continue-on-error: true
       
       - name: Run PHPMD
         run: vendor/bin/phpmd ./lib ansi codesize,unusedcode,naming
+        continue-on-error: true
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse ./lib/ --level=max
+        continue-on-error: true

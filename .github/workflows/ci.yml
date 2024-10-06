@@ -28,7 +28,7 @@ jobs:
           filename: log/coverage-cobertura.xml
       
       - name: Run PHPCS
-        run: vendor/bin/phpcs --extensions=php ./lib/Controller.php --report=summary
+        run: vendor/bin/phpcs --extensions=php ./lib/ --report=summary
         continue-on-error: true
       
       - name: Run PHPMD

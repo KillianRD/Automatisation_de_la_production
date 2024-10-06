@@ -27,6 +27,9 @@ jobs:
         with:
           filename: log/coverage-cobertura.xml
       
+      - name: Run PHPCS
+        run: vendor/bin/phpcs --extensions=php ./lib/
+      
       - name: Run PHPMD
         run: vendor/bin/phpmd ./lib ansi codesize,unusedcode,naming
 

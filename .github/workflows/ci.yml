@@ -40,7 +40,7 @@ jobs:
         continue-on-error: true
         
       - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.0.0
         with:
           server: ${{ secrets.URL }}
           username: ${{ secrets.USERNAME }}

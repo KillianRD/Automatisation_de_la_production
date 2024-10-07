@@ -153,4 +153,6 @@ jobs:
         continue-on-error: true
 ```
 
+on à eu un probleme : error: error permission denied
+
 

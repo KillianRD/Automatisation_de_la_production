@@ -46,8 +46,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           server-dir: www/
+          local-dir: ../
           exclude: |
             vendor/
-            tests/
-            data/
-

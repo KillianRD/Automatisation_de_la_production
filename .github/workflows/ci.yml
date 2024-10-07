@@ -47,6 +47,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           server-dir: www/
           local-dir: ../
-          exclude: |
-            vendor/
-            data/
+          exclude: "[**/.git/**, **/vendor/**]"

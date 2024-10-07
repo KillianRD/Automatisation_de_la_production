@@ -38,3 +38,10 @@ jobs:
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse ./lib/ --level=max
         continue-on-error: true
+        
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.URL}}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}

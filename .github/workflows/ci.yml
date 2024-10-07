@@ -49,3 +49,5 @@ jobs:
           exclude: |
             vendor/
             tests/
+            data/
+

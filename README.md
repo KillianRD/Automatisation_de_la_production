@@ -152,7 +152,3 @@ jobs:
         run: vendor/bin/phpstan analyse ./lib/ --level=max
         continue-on-error: true
 ```
-
-on à eu un probleme : error: error permission denied
-
-

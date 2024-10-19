@@ -3,6 +3,8 @@ Automatisation de la production
 
 #### Par Devoitine Célèna et Richardin--Dutilleul Killian
 
+# Partie CI.yml
+
 ## Sections du fichier de configuration
 
 1. Nom du Workflow <br>
@@ -106,7 +108,7 @@ le fichier phpunit.xml, qui ajoute les bibliothèques au projet :
 <directory suffix=".php">./vendor</directory>
 ```
 
-## Le fichier de configuration
+## Le fichier de configuration CI
 
 Voici la version complète de notre action GitHub qui permet de tester le projet PHP avec PHPUnit. <br>
 
@@ -151,4 +153,90 @@ jobs:
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse ./lib/ --level=max
         continue-on-error: true
+```
+
+# Partie CD.yml
+
+## Sections du fichier de configuration
+
+1. Nom du Workflow <br>
+   La ligne ``name: CD`` définit le nom du workflow qui sera affiché dans l'interface de GitHub Actions.
+   ```yaml
+   name: CD
+   ```
+
+2. Déclenchement du Workflow <br>
+   La ligne ``on:`` permet de déclencher le workflow CD lorsque le workflow CI est passé sans erreur
+   ```yaml
+    on:
+      workflow_run:
+      workflows: [CI]
+      types: [completed]
+   ```
+
+3. Jobs <br>
+   La section ``jobs`` définit les tâches qui seront exécutées. Dans ce cas, il y a un seul job nommé ``build-test``,
+   qui s'exécute sur un environnement Ubuntu.
+   ```yaml
+   jobs:
+      build-test:
+        runs-on: ubuntu-latest
+   ```
+
+4. Étapes du Job <br>
+
+    - Les étapes du job sont décrites sous la section steps. <br>
+
+      a. Checkout code <br>
+        - On utilise ``actions/checkout@v3`` pour cloner le dépôt dans l'environnement de
+          travail. <br>
+         ```yaml
+         - uses: actions/checkout@v4
+         ```
+      
+      b. FTP Deploy <br>
+        - L'étape FTP Deploy utilise ``SamKirkland/FTP-Deploy-Action@v4.3.5`` pour déployer le code sur un serveur FTP. 
+        - Les paramètres fournis incluent le répertoire local à déployer, l'URL du serveur FTP, le nom d'utilisateur et le mot de passe (stockés dans des secrets github), ainsi que le répertoire de destination sur le serveur. 
+        - Cette étape exclut également certains dossiers comme ``.git`` et ``vendor`` du déploiement. <br>
+         ```yaml
+         - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+           with :
+              local-dir: ./
+              server: ${{ secrets.URL }}
+              username: ${{ secrets.USERNAME }}
+              password: ${{ secrets.PASSWORD }}
+              server-dir: www/
+              exclude: |
+                **/.git*
+                **/.git*/**
+                **/vendor/**
+         ```
+
+## Le fichier de configuration CD
+
+Voici la version complète de notre action GitHub qui permet de deployer le projet sur un serveur FTP. <br>
+
+```yaml
+name: CD
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          local-dir: ./
+          server: ${{ secrets.URL }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          server-dir: www/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/vendor/**
 ```
